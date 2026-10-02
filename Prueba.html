@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Soporte</title>
+    
+    <!-- Mokõiha ta'ãnga: Icono pestaña-pe g̃uarã -->
+    <link rel="icon" href="Designer.png" type="image/png">
+    
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            
+            /* Peteĩha ta'ãnga: Fondo páginame g̃uarã */
+            background-image: C:\Users\rayas.rr\OneDrive - Procter and Gamble\Downloads('images.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #f9f9f9;
+        }
+        
+        .contenedor { 
+            max-width: 450px; 
+            margin: auto; 
+            /* Fondo morotĩ transparente ikatu hag̃uáicha ojelee porã */
+            background-color: rgba(255, 255, 255, 0.92); 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+        }
+        
+        .campo { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+        input, select, textarea { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-family: inherit; }
+        textarea { resize: vertical; min-height: 120px; }
+        button { background-color: #25D366; color: white; border: none; padding: 12px 15px; width: 100%; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px;}
+        button:hover { background-color: #128C7E; }
+        h2 { text-align: center; color: #333; margin-top: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h2>Reporte de Sistema</h2>
+        
+        <div class="campo">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" placeholder="Ej. Ana López" required>
+        </div>
+
+        <div class="campo">
+            <label for="teo">TEO / T#:</label>
+            <input type="text" id="teo" placeholder="Ej. T123456" required>
+        </div>
+
+        <div class="campo">
+            <label for="area">Área:</label>
+            <input type="text" id="area" placeholder="Ej. Finanzas, Recursos Humanos...">
+        </div>
+
+        <div class="campo">
+            <label for="problema">Problema y/o Permisos:</label>
+            <input type="text" id="problema" placeholder="Ej. Error al iniciar sesión / Solicitar acceso">
+        </div>
+
+        <div class="campo">
+            <label for="sistema">Sistema:</label>
+            <select id="sistema">
+                <option value="PrIME">PrIME</option>
+                <option value="SAP">SAP</option>
+                <option value="Ambos">Ambos</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="descripcion">Describe tu caso:</label>
+            <textarea id="descripcion" placeholder="Detalla aquí el error que te aparece o el permiso exacto que necesitas..."></textarea>
+        </div>
+
+        <button onclick="enviarWhatsApp()">Enviar Reporte por WhatsApp</button>
+    </div>
+
+    <script>
+        function enviarWhatsApp() {
+            // Emyengovia ko número nde número rehe (código de país + número, sin el símbolo +)
+            let numeroTelefono = "521234567890"; 
+
+            let nombre = document.getElementById("nombre").value;
+            let teo = document.getElementById("teo").value;
+            let area = document.getElementById("area").value;
+            let problema = document.getElementById("problema").value;
+            let sistema = document.getElementById("sistema").value;
+            let descripcion = document.getElementById("descripcion").value;
+
+            if(nombre === "" || teo === "") {
+                alert("Por favor, llena al menos tu Nombre y TEO/T#.");
+                return;
+            }
+
+            let textoFinal = "*NUEVO REPORTE DE SISTEMA*\n\n" +
+                             "👤 *Nombre:* " + nombre + "\n" +
+                             "🆔 *TEO / T#:* " + teo + "\n" +
+                             "🏢 *Área:* " + area + "\n" +
+                             "⚠️️ *Problema/Permisos:* " + problema + "\n" +
+                             "💻 *Sistema:* " + sistema + "\n\n" +
+                             "📝 *Descripción del caso:*\n" + descripcion;
+
+            let textoCodificado = encodeURIComponent(textoFinal);
+            let url = "https://wa.me/" + numeroTelefono + "?text=" + textoCodificado;
+            window.open(url, '_blank');
+        }
+    </script>
+
+</body>
+</html>
